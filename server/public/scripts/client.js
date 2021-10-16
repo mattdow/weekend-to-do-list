@@ -26,6 +26,8 @@ function refreshTasks() {
     }).catch(function(error){
         console.log('error in GET', error);        
     });
+    // after refreshing tasks, clear inputs
+    $('.textInput').val('');
 }
 
 // renderBooks will display the current array of tasks to the DOM
