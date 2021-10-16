@@ -12,6 +12,7 @@ addClickHandlers();
 // define click handling function
 function addClickHandlers() {
     $('#submitBtn').on('click', handleSubmit);
+    $('#taskOutput').on('click', '.deleteBtn', handleDelete);
 }
 
 // refreshTasks will get all tasks currently in server/DB and render to page
@@ -81,3 +82,19 @@ function handleSubmit() {
         alert('Unable to add task at this time.');        
     });    
 } // end handleSubmit
+
+// define handleDelete function to remove tasks from DB and DOM
+function handleDelete(){
+    let idToDelete = $(this).closest('tr').data('id');
+    console.log('Deleting item', idToDelete);
+    $.ajax({
+        type: 'DELETE',
+        url: `/tasks/${idToDelete}`
+    }).then(function (response) {
+        console.log('Response from server upon delete', response);
+        // DB updated, need to refresh DOM
+        refreshTasks();
+    }).catch(function(error) {
+        console.log('Error from server on delete', error);
+    });    
+} // end handleDelete function
