@@ -4,9 +4,15 @@ $(document).ready(function () {
 console.log('jQuery sourced.');
 // initial calling of task list
 refreshTasks();
+addClickHandlers();
 
 
 });
+
+// define click handling function
+function addClickHandlers() {
+    $('#submitBtn').on('click', handleSubmit);
+}
 
 // refreshTasks will get all tasks currently in server/DB and render to page
 function refreshTasks() {
@@ -50,3 +56,28 @@ function renderTasks(tasks) {
             $('#taskTable').append(taskRow);
     } // end of for loop
 } // end of renderTasks
+
+// define handleSubmit function to handle a newly posted task
+function handleSubmit() {
+    console.log('Submit button clicked.');
+    // initialize a task to enter inputs
+    let taskToAdd = {};
+    taskToAdd.taskname = $('#taskInput').val();
+    taskToAdd.priority = $('#priorityInput').val();
+    taskToAdd.dueDate = $('#dueDateInput').val();
+    taskToAdd.contextTag = $('#contextInput').val();
+    taskToAdd.completeStatus = false;
+    // make Ajax call to add the book to the database
+    $.ajax({
+        type: 'POST',
+        url: '/tasks',
+        data: taskToAdd,
+    }).then(function(response) {
+        console.log('POST response from server', response);
+        // call refreshTasks function to re-render
+        refreshTasks();
+    }).catch(function(error) {
+        console.log('Error in POST', error);
+        alert('Unable to add task at this time.');        
+    });    
+} // end handleSubmit
