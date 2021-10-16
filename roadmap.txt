@@ -1,6 +1,6 @@
 To Do items:
 
-[ ] Fix the date output
-[ ] Mark Complete button activate
-[ ] Sort by context, priority, due date
-[ ] Reformat the form
+[x] Fix the date output
+[] Mark Complete button activate
+[] Sort by context, priority, due date
+[] Reformat the form

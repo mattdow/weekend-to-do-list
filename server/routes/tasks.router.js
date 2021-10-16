@@ -56,6 +56,26 @@ router.delete('/:id', (req, res) => {
     });
 }); // end of router delete
 
+// define a put method to mark tasks as complete
+router.put('/:id', (req, res) => {
+    let id = req.params.id;
+    console.log('Put method activated for id', id);
+    let queryText = `UPDATE "tasks"
+                    SET "completeStatus" = TRUE
+                    WHERE "id" = $1;
+                    `;
+    let values = [id];
+    pool.query(queryText, values)
+        .then((result) => {
+            console.log('Put server result is', result);
+            res.sendStatus(201);
+        })
+        .catch((err) => {
+            console.log('Error making PUT request to DB', err);
+            res.sendStatus(500);
+        });
+}) // end of server put
+
 
 
 

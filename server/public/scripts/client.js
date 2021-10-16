@@ -13,6 +13,7 @@ addClickHandlers();
 function addClickHandlers() {
     $('#submitBtn').on('click', handleSubmit);
     $('#taskOutput').on('click', '.deleteBtn', handleDelete);
+    $('#taskOutput').on('click', '.completeBtn', handleComplete);
 }
 
 // refreshTasks will get all tasks currently in server/DB and render to page
@@ -120,6 +121,23 @@ function handleDelete(){
         console.log('Error from server on delete', error);
     });    
 } // end handleDelete function
+
+// define handleComplete function to adjust the DB and DOM
+function handleComplete(){
+    console.log('Complete button clicked');
+    let id = $(this).closest('tr').data('id');
+    console.log('Marking completed task ID', id);
+    $.ajax({
+        type: 'PUT',
+        url: `tasks/${id}`
+    }).then(function (response) {
+        console.log('Response from mark complete', response);
+        // refresh the DOM
+        refreshTasks();
+    }).catch(function (error) {
+        console.log('Error from read status', error);        
+    });    
+} // end of handleComplete
 
 // define a function to convert the SQL date to something more palatable. I Googled for ideas, and my function is a 
 // modification of the code found here: https://itnext.io/create-date-from-mysql-datetime-format-in-javascript-912111d57599
