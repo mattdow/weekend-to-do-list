@@ -50,15 +50,13 @@ function renderTasks(tasks) {
             completed = 'Task Complete';
             completeClass = 'hidden';
             priorityClass = 'priority-complete';
-        } // end of conditional
-        // resetting the priority class appropriately
-        if (task.priority === 1) {
+        } else if (task.priority === 1) {
             priorityClass = 'priority-1';
         } else if (task.priority === 2) {
             priorityClass = 'priority-2';
         } else if (task.priority === 3) {
             priorityClass = 'priority-3';
-        } // end of conditional
+        } // end of conditionals
         // use a parse date function to get a palatable date 
         let convertedDueDate = parseDate(task.dueDate);
         // For each book, append a new row to the table with appropriate content and classes
