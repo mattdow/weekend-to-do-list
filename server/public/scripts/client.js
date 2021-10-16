@@ -71,7 +71,7 @@ function renderTasks(tasks) {
                 ${completed}
             </td>
             <td>
-                <button class="deleteBtn btn btn-danger">Delete Task</button>
+                <button class="deleteBtn btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete Task</button>
             </td>
             `) // end of row rendering code
             $('#taskTable').append(taskRow);
