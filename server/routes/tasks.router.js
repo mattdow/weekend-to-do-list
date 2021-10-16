@@ -16,6 +16,24 @@ router.get('/', (req, res) => {
     }); // end of catch statement
 }); // end of get method
 
+// get request for resorted tasks
+router.get('/:cat', (req, res) => {
+    console.log(req.params);
+    let cat = req.params.cat;
+    console.log('Resorting tasks by', cat);
+    // define the query text for the resort
+    let queryText = `SELECT * FROM "tasks"
+                    ORDER BY $1;`;
+    console.log(queryText);
+    pool.query(queryText, [cat]).then(result => {
+        res.send(result.rows);
+    })
+    .catch(error => {
+        console.log('error getting tasks from server and db', error);
+        res.sendStatus(500);
+    }); // end of catch statement
+}); // end router get
+
 // post request for new tasks
 router.post('/', (req, res) => {
     let newTask = req.body;

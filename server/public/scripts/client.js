@@ -14,6 +14,7 @@ function addClickHandlers() {
     $('#submitBtn').on('click', handleSubmit);
     $('#taskOutput').on('click', '.deleteBtn', handleDelete);
     $('#taskOutput').on('click', '.completeBtn', handleComplete);
+    $('.task-header').on('click', handleSort)
 }
 
 // refreshTasks will get all tasks currently in server/DB and render to page
@@ -136,6 +137,25 @@ function handleComplete(){
         console.log('Error from read status', error);        
     });    
 } // end of handleComplete
+
+// defining a new function to get and resort the items by various categories
+function handleSort(){
+    console.log('Sort category clicked');
+    let cat = $(this).data('cat');
+    console.log(cat);
+    $.ajax({
+        type:'GET',
+        url:`tasks/${cat}`,
+    }).then(function (response) {
+        console.log('Tasklist sorting', response);
+        renderTasks(response);   
+    }).catch(function (response) {
+        console.log('');
+    }).catch(function(error){
+        console.log('error in GET', error);        
+    });
+    
+}
 
 // define a function to convert the SQL date to something more palatable. I Googled for ideas, and my function is a 
 // modification of the code found here: https://itnext.io/create-date-from-mysql-datetime-format-in-javascript-912111d57599
