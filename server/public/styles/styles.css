@@ -1,3 +1,30 @@
+body, button, .textInput  {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+th {
+    padding: 0.5em;
+}
+
+label {
+    padding-right: 0.5em;
+}
+
+
+.textInput {
+    margin-bottom: 1em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.task-name {
+    padding-left: 0.5em;
+    padding-right: 2em
+}
+
+.task-priority, .task-date {
+    text-align: center;
+}
+
 .priority-1 {
     background-color: rgb(255, 132, 132);
 }
@@ -12,4 +39,8 @@
 
 .priority-complete {
     background-color: rgb(170, 251, 170);
+}
+
+#main-table {
+    margin-top: 2em;
 }

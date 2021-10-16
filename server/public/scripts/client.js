@@ -62,9 +62,9 @@ function renderTasks(tasks) {
         // For each book, append a new row to the table with appropriate content and classes
         let taskRow = $(`
         <tr class="${priorityClass}" data-id="${task.id}">
-            <td>${task.taskname}</td>
-            <td>${task.priority}</td>
-            <td>${convertedDueDate}</td>
+            <td class="task-name">${task.taskname}</td>
+            <td class="task-priority">${task.priority}</td>
+            <td class="task-date">${convertedDueDate}</td>
             <td>${task.contextTag}</td>
             <td>
                 <button ${completeClass} class="completeBtn">Mark Complete</button>

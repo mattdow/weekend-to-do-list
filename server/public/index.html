@@ -15,16 +15,27 @@
     </header>
     <main>
         <div id="addTask">
-            <h3 id="addTaskHeader">Add New Task</h3>
-                <input class="textInput" value="" id="taskInput" size="40" placeholder="Task Name">
-                <input class="textInput" value="" id="priorityInput" size="15" placeholder="Priority (1,2, or 3)">
-                <input class="textInput" value="" id="dueDateInput" placeholder="Due Date">
-                <input class="textInput" value="" id="contextInput" placeholder="Context">
+            <fieldset>
+                <legend>Add New Task</legend>
+                <label>Task:</label><input class="textInput" value="" id="taskInput" size="40" placeholder="Task Name">
+                <br />
+                <label>Priority:</label>
+                <select class="textInput"  id="priorityInput"> 
+                    <option value="1">High</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Low</option>
+                </select>
+                <br />
+                <label>Due Date:</label><input class="textInput" value="" id="dueDateInput" placeholder="MM-DD-YYYY">
+                <br />
+                <label>Context Tag:</label><input class="textInput" value="" id="contextInput" placeholder="Context">
+                <br />
                 <button type="button" id="submitBtn">Submit Task</button>
+            </fieldset>
+                
         </div>
         <div id="taskOutput">
-            <h3>To-Do List</h3>
-            <table>
+            <table id="main-table">
                 <thead>
                     <tr>
                         <th>Task</th>
