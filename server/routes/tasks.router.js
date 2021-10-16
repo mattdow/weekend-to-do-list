@@ -36,6 +36,25 @@ router.post('/', (req, res) => {
         });
 }); // end of post method
 
+// define a delete method to remove tasks from the to-do list
+router.delete('/:id', (req, res) => {
+    // turn the id data into a variable
+    let id = req.params.id;
+    console.log('In delete method for ID', id);
+    let queryText = `
+        DELETE FROM "tasks"
+        WHERE "id" = $1;
+        `;
+    // define an array variable to pass into pool.query
+    let values = [id];
+    pool.query(queryText, values)
+    .then(result => {
+        res.sendStatus(204);
+    }).catch(err => {
+        console.log('Error in song delete');
+        res.sendStatus(500);        
+    });
+}); // end of router delete
 
 
 
