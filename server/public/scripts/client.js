@@ -49,13 +49,13 @@ function renderTasks(tasks) {
             // redefine the initialized variables if completeStatus is true
             completed = 'Task Complete';
             completeClass = 'hidden';
-            priorityClass = 'priority-complete';
+            priorityClass = 'table-success';
         } else if (task.priority === 1) {
-            priorityClass = 'priority-1';
+            priorityClass = 'table-danger';
         } else if (task.priority === 2) {
-            priorityClass = 'priority-2';
+            priorityClass = 'table-warning';
         } else if (task.priority === 3) {
-            priorityClass = 'priority-3';
+            priorityClass = 'table-primary';
         } // end of conditionals
         // use a parse date function to get a palatable date 
         let convertedDueDate = parseDate(task.dueDate);
@@ -67,11 +67,11 @@ function renderTasks(tasks) {
             <td class="task-date">${convertedDueDate}</td>
             <td>${task.contextTag}</td>
             <td>
-                <button ${completeClass} class="completeBtn">Mark Complete</button>
+                <button ${completeClass} class="completeBtn btn btn-success">Mark Complete</button>
                 ${completed}
             </td>
             <td>
-                <button class="deleteBtn">Delete Task</button>
+                <button class="deleteBtn btn btn-danger">Delete Task</button>
             </td>
             `) // end of row rendering code
             $('#taskTable').append(taskRow);
@@ -143,7 +143,7 @@ function handleComplete(){
 function parseDate(sqlDate) {
     // console.log(sqlDate);
     // chop off the year month and day string
-    let ydmDate = sqlDate.slice(0,10);
+    let ydmDate = sqlDate.split('T')[0];
     // console.log(ydmDate);
     // split up the year month and day
     let [dateYear, dateMonth, dateDay] = [...ydmDate.split("-")];

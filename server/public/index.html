@@ -5,37 +5,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="vendors/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="scripts/client.js"></script>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/styles.css">
     <title>Weekend Project 3: To-Do App</title>
 </head>
 <body>
-    <header>
+    <div class="page-header bg-secondary text-white text-center">
         <h1>To-Do App</h1>
-    </header>
+    </div>
     <main>
         <div id="addTask">
-            <fieldset>
-                <legend>Add New Task</legend>
-                <label>Task:</label><input class="textInput" value="" id="taskInput" size="40" placeholder="Task Name">
-                <br />
-                <label>Priority:</label>
-                <select class="textInput"  id="priorityInput"> 
-                    <option value="1">High</option>
-                    <option value="2">Medium</option>
-                    <option value="3">Low</option>
-                </select>
-                <br />
-                <label>Due Date:</label><input class="textInput" value="" id="dueDateInput" placeholder="MM-DD-YYYY">
-                <br />
-                <label>Context Tag:</label><input class="textInput" value="" id="contextInput" placeholder="Context">
-                <br />
-                <button type="button" id="submitBtn">Submit Task</button>
-            </fieldset>
+            <form class>
+                <div class="form-group mb-3">
+                    <label for="taskInput">Task:</label>
+                    <input class="textInput form-control" value="" id="taskInput" size="40" placeholder="Task Name">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="priorityInput">Priority:</label>
+                    <select class="textInput form-control" placeholder="Priority"  id="priorityInput"> 
+                        <option value="1">High</option>
+                        <option value="2">Medium</option>
+                        <option value="3">Low</option>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="dueDateInput">Due Date:</label>
+                    <input class="textInput form-control" value="" id="dueDateInput" placeholder="Due Date: MM-DD-YYYY">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="contextInput">Context Tag:</label>
+                    <input class="textInput form-control" value="" id="contextInput" placeholder="Context Tag">
+                </div>
+                <button type="button" class="btn btn-primary" id="submitBtn">Submit New Task</button>
+            </form>
                 
         </div>
-        <div id="taskOutput">
-            <table id="main-table">
+        <div id="taskOutput" class="mt-5">
+            <table id="main-table" class="table">
                 <thead>
                     <tr>
                         <th>Task</th>

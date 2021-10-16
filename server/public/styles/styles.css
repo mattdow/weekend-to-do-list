@@ -1,4 +1,4 @@
-body, button, .textInput  {
+/* body, button, .textInput  {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -24,6 +24,7 @@ label {
 .task-priority, .task-date {
     text-align: center;
 }
+*/
 
 .priority-1 {
     background-color: rgb(255, 132, 132);
@@ -40,7 +41,7 @@ label {
 .priority-complete {
     background-color: rgb(170, 251, 170);
 }
-
+/*
 #main-table {
     margin-top: 2em;
-}
+} */
