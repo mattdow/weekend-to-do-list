@@ -34,23 +34,42 @@ function refreshTasks() {
 function renderTasks(tasks) {
   // empty the active task table
     $('#taskTable').empty();
+    // initialize two variables for completed class and content
+    let completed = '';
+    let completeClass = '';
+    // initialize priority class at the lowest task urgency level
+    let priorityClass = 'priority-3';
     // loop through the tasks
     for(let i=0; i < tasks.length; i++) {
         let task = tasks[i];
-        // set a temp variable equating to the completed status
-        let completed = 'No';
+        // call a function to determine classes and content
+        console.log("Task priority is",task.priority);
         if (task.completeStatus) {
-            completed = 'Yes';
-        }
-        // For each book, append a new row to the table
+            // redefine the initialized variables if completeStatus is true
+            completed = 'Task Complete';
+            completeClass = 'hidden';
+            priorityClass = 'priority-complete';
+        } // end of conditional
+        // resetting the priority class appropriately
+        if (task.priority === 1) {
+            priorityClass = 'priority-1';
+        } else if (task.priority === 2) {
+            priorityClass = 'priority-2';
+        } else if (task.priority === 3) {
+            priorityClass = 'priority-3';
+        } // end of conditional
+        // use a parse date function to get a palatable date 
+        let convertedDueDate = parseDate(task.dueDate);
+        // For each book, append a new row to the table with appropriate content and classes
         let taskRow = $(`
-        <tr data-id="${task.id}">
+        <tr class="${priorityClass}" data-id="${task.id}">
             <td>${task.taskname}</td>
             <td>${task.priority}</td>
-            <td>${task.dueDate}</td>
+            <td>${convertedDueDate}</td>
             <td>${task.contextTag}</td>
             <td>
-                <button class="completeBtn">Mark Complete</button>
+                <button ${completeClass} class="completeBtn">Mark Complete</button>
+                ${completed}
             </td>
             <td>
                 <button class="deleteBtn">Delete Task</button>
@@ -59,6 +78,7 @@ function renderTasks(tasks) {
             $('#taskTable').append(taskRow);
     } // end of for loop
 } // end of renderTasks
+
 
 // define handleSubmit function to handle a newly posted task
 function handleSubmit() {
@@ -100,3 +120,22 @@ function handleDelete(){
         console.log('Error from server on delete', error);
     });    
 } // end handleDelete function
+
+// define a function to convert the SQL date to something more palatable. I Googled for ideas, and my function is a 
+// modification of the code found here: https://itnext.io/create-date-from-mysql-datetime-format-in-javascript-912111d57599
+
+function parseDate(sqlDate) {
+    // console.log(sqlDate);
+    // chop off the year month and day string
+    let ydmDate = sqlDate.slice(0,10);
+    // console.log(ydmDate);
+    // split up the year month and day
+    let [dateYear, dateMonth, dateDay] = [...ydmDate.split("-")];
+    // define an object of month abbreviations
+    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    // redefine the month as abbreviated text, converting the numerical month to an index
+    dateMonth = months[dateMonth-1];
+    // redefine the date as a string to return
+    let monthDayString = `${dateMonth} ${dateDay}`
+    return monthDayString;
+} // end parseDate

@@ -1,0 +1,15 @@
+.priority-1 {
+    background-color: rgb(255, 132, 132);
+}
+
+.priority-2 {
+    background-color: rgb(250, 227, 151);
+}
+
+.priority-3 {
+    background-color: rgb(164, 220, 255);
+}
+
+.priority-complete {
+    background-color: rgb(170, 251, 170);
+}
