@@ -25,7 +25,8 @@ router.get('/:cat', (req, res) => {
     let queryText = `SELECT * FROM "tasks"
                     ORDER BY $1;`;
     console.log(queryText);
-    pool.query(queryText, [cat]).then(result => {
+    values = [cat];
+    pool.query(queryText, values).then(result => {
         res.send(result.rows);
     })
     .catch(error => {
