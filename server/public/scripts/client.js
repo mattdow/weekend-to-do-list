@@ -12,7 +12,14 @@ addClickHandlers();
 // define click handling function
 function addClickHandlers() {
     $('#submitBtn').on('click', handleSubmit);
-    $('#taskOutput').on('click', '.deleteBtn', handleDelete);
+
+    // in order for the Bootstrap confirm delete modal to work, I need to pass the id of the task to the final confirmation button.
+    $('#taskOutput').on('click', '.deleteBtn', function() {
+        let idToDelete = $(this).closest('tr').data('id')
+        $('#confirm-button').data('id', idToDelete);
+    });
+    // now I can call the delete request with the confirm button
+    $('#confirm-button').on('click', handleDelete);
     $('#taskOutput').on('click', '.completeBtn', handleComplete);
 }
 
@@ -106,7 +113,7 @@ function handleSubmit() {
 
 // define handleDelete function to remove tasks from DB and DOM
 function handleDelete(){
-    let idToDelete = $(this).closest('tr').data('id');
+    let idToDelete = $(this).data('id');
     console.log('Deleting item', idToDelete);
     $.ajax({
         type: 'DELETE',
