@@ -41,6 +41,10 @@ label {
 .priority-complete {
     background-color: rgb(170, 251, 170);
 }
+
+.task-header {
+    cursor: pointer;
+}
 /*
 #main-table {
     margin-top: 2em;

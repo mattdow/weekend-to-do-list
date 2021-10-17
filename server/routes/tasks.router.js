@@ -16,6 +16,46 @@ router.get('/', (req, res) => {
     }); // end of catch statement
 }); // end of get method
 
+// get request for resorted tasks
+router.get('/:cat', (req, res) => {
+    console.log(req.params);
+    let cat = req.params.cat;
+    console.log('Resorting tasks by', cat);
+    let myCat = parameterizeCat(cat);
+    // define the query text for the resort
+    let queryText = `SELECT * FROM "tasks"
+                    ORDER BY "${myCat}";`;
+    console.log(queryText);
+    // values = [cat];
+    pool.query(queryText).then(result => {
+        res.send(result.rows);
+    })
+    .catch(error => {
+        console.log('error getting tasks from server and db', error);
+        res.sendStatus(500);
+    }); // end of catch statement
+}); // end router get
+
+// creating a function to turn the parameter cat into a string I can pass into a SQL query if and only if it is a valid category. Not sure this is the best idea security-wise, but the $1 parameterization wasn't working.
+function parameterizeCat(cat) {
+    let myCat;
+    switch (cat) {
+        case 'priority':
+            myCat = "priority";
+            break;
+        case 'dueDate':
+            myCat = "dueDate";
+            break;
+        case 'contextTag':
+            myCat = "contextTag";
+            break;
+        default :
+            myCat = undefined;
+    }
+    return myCat;
+} // end of parameterize function
+
+
 // post request for new tasks
 router.post('/', (req, res) => {
     let newTask = req.body;
