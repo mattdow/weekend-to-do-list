@@ -51,6 +51,9 @@ function renderTasks(tasks) {
     // loop through the tasks
     for(let i=0; i < tasks.length; i++) {
         let task = tasks[i];
+        completed = '';
+        completeClass = '';
+        priorityClass = 'table-primary';
         // call a function to determine classes and content
         console.log("Task priority is",task.priority);
         if (task.completeStatus) {
